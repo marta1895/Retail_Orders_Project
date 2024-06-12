@@ -16,7 +16,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 ### instalation of kaggle
 ![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/6648685d-e526-4bcf-be9b-2f71bbab61ac)
 
-#download dataset using kaggle api
+### download dataset using kaggle api
 ![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/2400cd12-7fcf-4227-a30a-97d5dbbfb06b)
 
 ### extract file from zip file
