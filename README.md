@@ -13,7 +13,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 
 1. Import Kaggle API into Jupyter Notebook
    
-### instalation of kaggle
+#### instalation of kaggle
 ![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/6648685d-e526-4bcf-be9b-2f71bbab61ac)
 
 ### download dataset using kaggle api
