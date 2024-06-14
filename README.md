@@ -7,7 +7,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 - Perform Data Cleaning and Preparation using Pandas
 - Load the Data into SQL Server using the "Replace" Option
 - Analyze Data using PostgreSQL
-- Viziulaze summery data using Tableu platrform
+- Viziulaze summary data using Tableu platrform
   
 ## Steps and Implementation
 
