@@ -68,4 +68,13 @@ In the screenshot below, I highlighted in yellow the new data type sizes that ar
 By following these steps, you should have successfully loaded your data into SQL Server using the "Append" option, ensuring that the data types are appropriate and efficient.
 ### 5. Analyze Data using PostgreSQL
 
-#### - Find top 10 hoghest revue generating products
+#### - Find Top 10 hoghest revue generating products
+![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/e272b08c-ddc4-463d-a12b-f0b563d62f5d)
+
+#### - Find Top 5 highest selling products in each region
+![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/6a227b35-9c3a-4e32-87b4-f2bbec792bbb)
+
+#### - Find month over month growth comparison for 2022 and 2023 sales eg : Jan 2022 VS Jan 2023
+![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/e1f43892-2147-4948-86b0-fca37fd5e307)
+
+#### - FOR each categpry which month had highest sales
