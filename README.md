@@ -77,4 +77,5 @@ By following these steps, you should have successfully loaded your data into SQL
 #### - Find month over month growth comparison for 2022 and 2023 sales eg : Jan 2022 VS Jan 2023
 ![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/e1f43892-2147-4948-86b0-fca37fd5e307)
 
-#### - For each category which month had highest sales
+#### - Find the month with the highest sales for each category
+![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/4a1da184-5a69-4627-ae54-04d2fe2002c5)
