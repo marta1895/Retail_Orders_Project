@@ -79,3 +79,5 @@ By following these steps, you should have successfully loaded your data into SQL
 
 #### - Find the month with the highest sales for each category
 ![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/4a1da184-5a69-4627-ae54-04d2fe2002c5)
+
+#### - Find which sub category had highest growth by profit in 2023 compare to 2022
