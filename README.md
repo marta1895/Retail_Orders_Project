@@ -8,7 +8,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 - Load the Data into SQL Server using the "Replace" Option
 - Load the Data into SQL Server using the "Append" Option
 - Analyze Data using PostgreSQL
-- Viziulaze summary data using Tableu platrform
+- Viziulaze summary data using Tableau platform
   
 ## Steps and Implementation
 
