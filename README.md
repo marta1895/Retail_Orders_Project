@@ -8,77 +8,152 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 - Load the Data into SQL Server using the "Replace" Option
 - Load the Data into SQL Server using the "Append" Option
 - Analyze Data using PostgreSQL
-- Viziulaze summary data using Tableau platform
+- Visualize summary data using the Tableau platform
   
-## Steps and Implementation
+# Steps and Implementation
 
-### 1. Import Kaggle API into Jupyter Notebook
+## 1. Import Kaggle API into Jupyter Notebook
    
-#### - Instalation of Kaggle
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/6648685d-e526-4bcf-be9b-2f71bbab61ac)
+### - First, I obtained Kaggle API Credentials by downloading a file named kaggle.json to my computer, which contains my username and an API key
 
-#### - Downloading dataset using Kaggle API
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/2400cd12-7fcf-4227-a30a-97d5dbbfb06b)
+### - Installation of the opendatasets library in Jupiter Notebook
+<img width="1600" height="891" alt="image" src="https://github.com/user-attachments/assets/34267b41-6617-47e8-81c3-3c8671359d88" />
 
-#### - Extracting the file from the zip file
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/d8c4ab84-7836-4965-a824-293cddb2f487)
 
-### 2. Perform Data Cleaning and Preparation using Pandas
+##### *The opendatasets library allows direct and automated downloading of Kaggle datasets into Jupyter Notebook using the Kaggle API, making the data import process faster and more efficient.
+
+### – Installation of the pandas library in Jupiter Notebook
+<img width="1600" height="207" alt="image" src="https://github.com/user-attachments/assets/f04f4963-5be1-4ec6-addc-bc2de172714c" />
+
+### – Importing the opendatasets and pandas libraries, and downloading the Kaggle dataset into Jupiter Notebook
+<img width="1600" height="419" alt="image" src="https://github.com/user-attachments/assets/16f70606-0ad9-4ba4-ab16-79949107965f" />
+
+##### *During the import process, I added the Kaggle API credentials obtained in the first step. Then, the dataset was successfully downloaded from Kaggle using the Kaggle API.
+
+## 2. Perform Data Cleaning and Preparation using Pandas
    
-#### - Reading the data from the file and handle null values
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/f08cab01-c388-4122-ad09-d0762558fb4a)
+### - Reading the data from the .csv file of the downloaded dataset by using pd.read_csv() function
+<img width="1600" height="449" alt="image" src="https://github.com/user-attachments/assets/bee90c19-d687-4808-a1b2-c94f004d16f0" />
 
-#### - Renaming of columns names, making them lower case and replacing space with underscore 
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/9aaad536-3ad8-4140-b375-5f0183832b42)
+##### *pd.read_csv() function is a core command in the pandas library used to read a comma-separated values (CSV) file into a pandas DataFrame. After I uploaded the .csv file and confirmed a successful upload, we can start with data cleaning
 
-#### - Deriving new columns: "discount", "sale_price" and "profit"
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/a01667f5-17a2-4858-bd31-d9e5b95036f2)
+### - Handling null values
+<img width="1600" height="472" alt="image" src="https://github.com/user-attachments/assets/4941bd3c-6054-43c4-99af-76235d303900" />
 
-#### - Converting column "order_date" from object data type to datatime
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/b8b071a8-51d2-4e69-aca8-cbf4abf157d6)
+### – Identifying missing values by column
+<img width="1600" height="568" alt="image" src="https://github.com/user-attachments/assets/e645f628-c082-4550-93c8-49e17166092d" />
 
-#### - Dropping the columns: "cost_price", "list_price" and "discount_percent"
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/573a721a-00b4-4b2a-84d2-c97e93766d21)
+##### We can see that the Ship Mode column contains 6 missing values, while all other columns have no missing entries.
 
-### 3. Load the Data into SQL Server using the "Replace" Option
+### – Cleaning and standardizing column names
+<img width="1600" height="568" alt="image" src="https://github.com/user-attachments/assets/0064a903-d570-4a6c-b82e-8324a7ae01d1" />
+
+### – Fixing incorrect data types
+##### First, we check the data types of each column using df.info()
+<img width="1600" height="604" alt="image" src="https://github.com/user-attachments/assets/f8c26243-341b-492a-b902-47ff5e36b6ba" />
+
+##### From the output, we can see that the order_date column is stored as an object instead of a datetime data type. The numeric columns (cost_price, list_price, quantity, and discount_percent) were reviewed using df.info(). All columns were already stored as numeric (int64) data types, so no additional conversion was required.
+
+#### The order_date column is converted from a string (object) data type to a datetime data type using pd.to_datetime()
+<img width="1600" height="70" alt="image" src="https://github.com/user-attachments/assets/e9be3cf7-d6bf-46a2-99fb-8764acf2b31e" />
+
+### – Identifying whether the order_id column is considered as a primary key
+<img width="1600" height="304" alt="image" src="https://github.com/user-attachments/assets/ff8d6c4d-e6ae-4525-bce6-12e63cc0f89d" />
+
+##### The order_id column was reviewed and found to contain unique, non-null values across all rows. Therefore, it can be treated as a primary key for the dataset.
+
+### – Deriving new columns: "discount", "sale_price" and "profit"
+#### Three additional columns were derived to support further analysis of pricing and profitability:
+- discount – monetary discount applied to the list price
+- sale_price – final price after discount
+- profit – difference between sale price and cost price
+
+<img width="1600" height="669" alt="image" src="https://github.com/user-attachments/assets/20d1cf14-2160-46f4-a412-b8ee5a3b9088" />
+
+### – Dropping original pricing columns
+#### After deriving the discount, sale_price, and profit columns, the original pricing columns (cost_price, list_price, and discount_percent) were removed, as all further analysis can be performed using the newly derived fields.
+<img width="1600" height="622" alt="image" src="https://github.com/user-attachments/assets/a47fd29f-63d6-4361-930d-9d42fb711b42" />
+
+## 3. Load the Data into SQL Server using the "Replace" Option
    
-#### - Importing SQLAlchemy library, setting up the database connection details, creating a connection string for PostgreSQL, and establishing a connection to the PostgreSQL database using SQLAlchemy
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/cdabc90f-f7eb-406b-878d-6c74fd556762)
+### - Installation of the SQLAlchemy library
+<img width="1600" height="116" alt="image" src="https://github.com/user-attachments/assets/e9a04f78-4b41-4ca0-b9dd-9d6bcf2c199d" />
 
-#### - Checking the SQL Server if the data is loaded
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/f5356e50-826b-4565-8a00-bf2b3f03972c)
-In the screenshot above, you can see that the data has been successfully loaded into SQL Server. However, the data type for each column is not quite appropriate and is too large, such as bigint, text, not defined as Primary Key, and date data type. This happened because I was using the "Replace" option and pandas created a table with the highest possible data types.
+### – Importing SQLAlchemy library, setting up the database connection details, creating a connection string for PostgreSQL, and establishing a connection to the PostgreSQL database using SQLAlchemy
+<img width="1600" height="424" alt="image" src="https://github.com/user-attachments/assets/151c96d1-9c05-4dab-bc88-19a85cca16d2" />
 
-### 4. Load the Data into SQL Server using the "Append" Option.
+### – Load the data into SQL Server using the Replace function
+<img width="1600" height="129" alt="image" src="https://github.com/user-attachments/assets/1f8dc02d-301c-4fe5-b237-d44d39eeaeed" />
 
-#### - Fixing the improper data type issue by using the "Append" option instead of the "Replace" option
-First, I dropped the table.
+### – Checking the SQL Server to see if the data is loaded
+<img width="1232" height="923" alt="image" src="https://github.com/user-attachments/assets/8632653f-4369-4747-91c4-e2d3f6c11de2" />
 
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/be02194c-9476-4b82-9c72-149280e0a2ba)
+##### *In the screenshot above, you can see that the data has been successfully loaded into SQL Server. However, the data type for each column is not quite appropriate and is too large, such as bigint, text, and an undefined primary key, as well as incorrect date data types. This happened because I was using the "Replace" option and pandas created a table with the highest possible data types.
 
-Then, I created the empty table with the respective columns defined with the appropriate data type sizes.![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/b5674935-bde1-4389-8f0c-4be72db003a3)
+## 4. Load the Data into SQL Server using the "Append" Option
 
-Next, I implemented the "Append" option instead of the "Replace" option.
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/e10ccc7a-7643-464d-a390-6af62eabb9e7)
+### - Fixing the improper data type issue by using the "Append" option instead of the "Replace" option
 
-#### - Checking if the data is loaded with the "Append" option
-In the screenshot below, I highlighted in yellow the new data type sizes that are much more efficient.
+#### First, I dropped the table.
+<img width="1218" height="846" alt="image" src="https://github.com/user-attachments/assets/020b3f5a-347f-4c88-8736-12ed6a0a116d" />
+
+#### Then, I created the empty table with the respective columns defined with the appropriate data type sizes.
+<img width="1600" height="915" alt="image" src="https://github.com/user-attachments/assets/364d274e-01bc-490a-b678-a3eb4504b615" />
+
+#### Next, getting back to the Jupyter Notebook, I implemented the "Append" option instead of the "Replace" option.
+<img width="1600" height="534" alt="image" src="https://github.com/user-attachments/assets/6392e231-682f-478e-9147-7163e6290660" />
+
+### - Checking if the data is loaded with the "Append" option
+#### In the screenshot below, I highlighted in yellow the new data type sizes that are much more efficient.
 ![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/4d83543b-9521-497b-b181-4ff60b979b3b)
 
-By following these steps, you should have successfully loaded your data into SQL Server using the "Append" option, ensuring that the data types are appropriate and efficient.
-### 5. Analyze Data using PostgreSQL
+##### By following these steps, you should have successfully loaded your data into SQL Server using the "Append" option, ensuring that the data types are appropriate and efficient.
 
-#### - Find the Top 10 highest-generating products
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/e272b08c-ddc4-463d-a12b-f0b563d62f5d)
+## 5. Analyze Data using PostgreSQL
 
-#### - Find the Top 5 highest-selling products in each region
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/6a227b35-9c3a-4e32-87b4-f2bbec792bbb)
+#### In this section, I identified the top business questions.
 
-#### - Find month-over-month growth comparison for 2022 and 2023 sales eg: Jan 2022 VS Jan 2023
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/e1f43892-2147-4948-86b0-fca37fd5e307)
+### - Find Top 10 Revenue-Generating Products 
+<img width="1600" height="925" alt="image" src="https://github.com/user-attachments/assets/2de1ae2a-4ff6-4c89-9ea0-69ad0339d2e2" />
 
-#### - Find the month with the highest sales for each category
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/4a1da184-5a69-4627-ae54-04d2fe2002c5)
+### –Top 3 Sub-Categories by Total Quantity Sold per Region
+<img width="1600" height="1009" alt="image" src="https://github.com/user-attachments/assets/4da20eb9-ce31-46a5-bebe-523ec65e0431" />
+<img width="1600" height="671" alt="image" src="https://github.com/user-attachments/assets/cf4d3aed-5341-42a9-8efc-249a7fe80964" />
 
-#### - Find which sub-category had the highest growth by profit in 2023 compared to 2022
-![image](https://github.com/marta1895/Retail_Orders_Project/assets/141928743/91e63c23-f986-4691-b5b3-6746c00c70a0)
+### – Monthly Sales Comparison (2022 vs 2023) with Growth %
+<img width="1600" height="1063" alt="image" src="https://github.com/user-attachments/assets/fa2feb8c-0155-4536-885e-105e2f3b7423" />
+<img width="994" height="832" alt="image" src="https://github.com/user-attachments/assets/cf485d56-287f-48a1-abf0-caf6b4a1eee9" />
+
+### - Find the Month with the Highest Sales for Each Category
+<img width="1600" height="1383" alt="image" src="https://github.com/user-attachments/assets/6d886487-e47b-4696-b042-49c8f90457f0" />
+
+### - Find the Sub-Category with the Highest Sales Growth in 2023 Compared to 2022
+<img width="1600" height="1202" alt="image" src="https://github.com/user-attachments/assets/ece1fa1d-5900-4b4d-b6a6-51983d10f5ee" />
+
+### Additionally, I decided to include several additional metrics to provide a more complete picture in the visualization:
+
+### – Find the Total number of Orders Distributed for Years: 2022 vs 2023
+<img width="1600" height="702" alt="image" src="https://github.com/user-attachments/assets/c1dce452-251c-4d95-8e2d-2c4eb78591ee" />
+
+### – Find the Total Sales by State (U.S.)
+<img width="1600" height="1095" alt="image" src="https://github.com/user-attachments/assets/4b6e5da3-e41c-4126-8bad-cc3f83b3e670" />
+
+### – Find the Top-Performing Sub-Categories with Total Sales Exceeding $800K.
+<img width="1600" height="960" alt="image" src="https://github.com/user-attachments/assets/687ba05c-c1b1-4781-8e41-9a7a61aeafc5" />
+<img width="1600" height="641" alt="image" src="https://github.com/user-attachments/assets/c9502662-d847-4551-988c-fec698a4c356" />
+
+### — Find the Total Revenue Distribution: 2022 vs 2023
+<img width="1600" height="668" alt="image" src="https://github.com/user-attachments/assets/77a118c0-011f-42ac-bfa5-35dd8d896e88" />
+
+### – Find the Profit Growth (YoY): 2023 compared to 2022
+<img width="1600" height="808" alt="image" src="https://github.com/user-attachments/assets/2b45a271-59d5-4b4d-a42a-3f9b0695c869" />
+
+## 6. Visualize summary data using the Tableau platform
+
+<img width="1600" height="1073" alt="image" src="https://github.com/user-attachments/assets/5cf1a07e-cd74-4885-8388-be3bd68d8a81" />
+
+##### Link to Tableau Dashboard: https://public.tableau.com/app/profile/marta.narozhnyak/viz/shared/ZGQTXF3CW
+
+
+
+
