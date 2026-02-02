@@ -1,5 +1,7 @@
+-- Deleting the table after using the Replace option in order to switch to the Append option
 DROP TABLE df_orders;
 
+-- Creating a blank table with appropriate data types to enable appending data from Jupyter Notebook
 CREATE TABLE df_orders (
 	order_id int primary key, 
 	order_date date, 
@@ -19,11 +21,12 @@ CREATE TABLE df_orders (
 	profit decimal (7, 2)
 );
 
+-- Checking the table's content and types
 SELECT * FROM df_orders;
 
---- Own findings -------------------------------------
+--------- Analysis ----------
 
--- Total Orders -------
+-- 1. Total Orders -------
 
 WITH total_orders_year AS (
     SELECT 
@@ -38,7 +41,8 @@ SELECT
 FROM total_orders_year;
 
 
---- Sales by states -------
+--- 2. Sales by states -------
+
 SELECT
 state,
 SUM(sale_price * quantity) AS total_sales
@@ -46,7 +50,8 @@ FROM df_orders
 GROUP BY state 
 ORDER BY total_sales DESC;
 
---- Sales by sub-category with sales more then 800K -----
+--- 3. Sales by sub-category with sales more then 800K -----
+
 WITH sales_per_subcategory AS (
     SELECT
         sub_category,
@@ -80,13 +85,15 @@ FROM grouped_subcategories
 ORDER BY total_sales DESC;
 
 	
--- Total Revenue--------
+-- 4. Total Revenue --------
+
 SELECT
     SUM(sale_price * quantity) AS combined_revenue_2022_2023
 FROM df_orders
 WHERE EXTRACT(YEAR FROM order_date) IN (2022, 2023);
 
---- Revenue Compared 2022 vs 2023 ---
+--- 5. Revenue Compared 2022 vs 2023 ---
+
 WITH total_revenue_year AS (
     SELECT 
         EXTRACT(YEAR FROM order_date) AS year,
@@ -100,7 +107,8 @@ SELECT
 FROM total_revenue_year;
 
 
---- Profit Growth ----
+--- 6. Profit Growth ----
+
 WITH yearly_profit AS (
     SELECT
         EXTRACT(YEAR FROM order_date) AS order_year,
@@ -119,7 +127,8 @@ SELECT
 FROM yearly_profit;
 
 
----Top 3 sub-categories------
+--- 7. Top 3 sub-categories------
+
 SELECT
     sub_category,
     SUM(sale_price) AS total_sales
@@ -127,9 +136,8 @@ FROM df_orders
 GROUP BY sub_category
 ORDER BY total_sales DESC
 LIMIT 3;
------------------------Business questions---------
 
----1.Find Top 10 Revenue-Generating Products ---
+--- 8. Find Top 10 Revenue-Generating Products ---
 
 -- Calculate total revenue per product using SUM, and find the top 10 revenue-generating products
 SELECT
@@ -142,7 +150,7 @@ LIMIT 10;
 
 
 
----2. –Top 3 Sub-Categories by Total Quantity Sold per Region ---
+--- 9. –Top 3 Sub-Categories by Total Quantity Sold per Region ---
 
 -- Use Common Table Expressions (CTEs) to improve query readability and structure
 WITH sales_by_subcategory AS (
@@ -176,7 +184,7 @@ WHERE rank_in_region <= 3
 ORDER BY region, rank_in_region;
 
 
----3. Monthly Sales Comparison (2022 vs 2023)  with Growth % ----
+--- 10. Monthly Sales Comparison (2022 vs 2023)  with Growth % ----
 
 WITH sales_by_month AS (
     SELECT
@@ -212,7 +220,7 @@ FROM months_sales
 ORDER BY order_month;
 
 
----4.Find the month with the highest sales for each category ----
+--- 11. Find the month with the highest sales for each category ----
 
 --Use CTEs to calculate total sales per category per year-month
 WITH sales_by_category AS (
@@ -243,7 +251,7 @@ FROM ranked_months
 WHERE sales_rank = 1;
 
 
----5. Find the sub-category with the highest sales growth in 2023 compared to 2022 ----
+--- 12. Find the sub-category with the highest sales growth in 2023 compared to 2022 ----
 
 WITH sales_by_year AS (
 	SELECT 
