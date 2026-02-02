@@ -2,17 +2,36 @@
 ## Dataset Description
 The dataset comprises global mart sales data for the years 2022 and 2023, categorized into three main categories: Furniture, Office Supplies, and Technology. Each main category is further divided into detailed sub-categories.
 
-## Project Goals
-- Import Kaggle API into Jupyter Notebook using Python
-- Perform Data Cleaning and Preparation using Pandas
-- Load the Data into SQL Server using the "Replace" Option
-- Load the Data into SQL Server using the "Append" Option
-- Analyze Data using PostgreSQL
-- Visualize summary data using the Tableau platform
+## 🎯 Project Goals
+1️⃣ Import Kaggle API into Jupyter Notebook using Python
+2️⃣ Perform Data Cleaning and Preparation using Pandas
+3️⃣ Load the Data into SQL Server using the "Replace" Option
+4️⃣ Load the Data into SQL Server using the "Append" Option
+5️⃣ Analyze Data using PostgreSQL
+6️⃣ Visualize summary data using the Tableau platform
+
+## 📋 Repository Structure
+Retail_Orders_Project/
+├── README.md                  # Project overview, steps, and insights
+├── data/
+│   └── orders.csv             # Raw dataset file
+├── notebooks/
+│   └── sales_analysis.ipynb   # Data cleaning & preparation
+├── sql/
+│   └── sales_analysis.sql     # SQL analysis queries
+└── tableau/
+    └── Sales_analysis.twbx    # Tableau dashboard
+
+## 🔍 Key Business Questions:
+- "Top 10 Revenue-Generating Products"
+- "Top 3 Sub-Categories by Total Quantity Sold per Region"
+- "Monthly Sales Comparison (2022 vs 2023) with Growth %"
+- "Month with the Highest Sales for Each Category"
+- "Sub-Category with the Highest Sales Growth in 2023 Compared to 2022"
   
 # Steps and Implementation
 
-## 1. Import Kaggle API into Jupyter Notebook
+## 1️⃣ Import Kaggle API into Jupyter Notebook
    
 #### - First, I obtained Kaggle API Credentials by downloading a file named kaggle.json to my computer, which contains my username and an API key
 
@@ -30,7 +49,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 
 ##### *During the import process, I added the Kaggle API credentials obtained in the first step. Then, the dataset was successfully downloaded from Kaggle using the Kaggle API.
 
-## 2. Perform Data Cleaning and Preparation using Pandas
+## 2️⃣ Perform Data Cleaning and Preparation using Pandas
    
 #### - Reading the data from the .csv file of the downloaded dataset by using pd.read_csv() function
 <img width="1600" height="449" alt="image" src="https://github.com/user-attachments/assets/bee90c19-d687-4808-a1b2-c94f004d16f0" />
@@ -74,7 +93,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 ##### After deriving the discount, sale_price, and profit columns, the original pricing columns (cost_price, list_price, and discount_percent) were removed, as all further analysis can be performed using the newly derived fields.
 <img width="1600" height="622" alt="image" src="https://github.com/user-attachments/assets/a47fd29f-63d6-4361-930d-9d42fb711b42" />
 
-## 3. Load the Data into SQL Server using the "Replace" Option
+## 3️⃣ Load the Data into SQL Server using the "Replace" Option
    
 #### - Installation of the SQLAlchemy library
 <img width="1600" height="116" alt="image" src="https://github.com/user-attachments/assets/e9a04f78-4b41-4ca0-b9dd-9d6bcf2c199d" />
@@ -90,7 +109,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 
 ##### *In the screenshot above, you can see that the data has been successfully loaded into SQL Server. However, the data type for each column is not quite appropriate and is too large, such as bigint, text, and an undefined primary key, as well as incorrect date data types. This happened because I was using the "Replace" option and pandas created a table with the highest possible data types.
 
-## 4. Load the Data into SQL Server using the "Append" Option
+## 4️⃣ Load the Data into SQL Server using the "Append" Option
 
 #### - Fixing the improper data type issue by using the "Append" option instead of the "Replace" option
 
@@ -109,14 +128,14 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 
 ##### By following these steps, you should have successfully loaded your data into SQL Server using the "Append" option, ensuring that the data types are appropriate and efficient.
 
-## 5. Analyze Data using PostgreSQL
+## 📊  5️⃣ Analyze Data using PostgreSQL
 
 ##### In this section, I identified the top business questions.
 
 #### - Find Top 10 Revenue-Generating Products 
 <img width="1600" height="925" alt="image" src="https://github.com/user-attachments/assets/2de1ae2a-4ff6-4c89-9ea0-69ad0339d2e2" />
 
-#### –Top 3 Sub-Categories by Total Quantity Sold per Region
+#### – Top 3 Sub-Categories by Total Quantity Sold per Region
 <img width="1600" height="1009" alt="image" src="https://github.com/user-attachments/assets/4da20eb9-ce31-46a5-bebe-523ec65e0431" />
 <img width="1600" height="671" alt="image" src="https://github.com/user-attachments/assets/cf4d3aed-5341-42a9-8efc-249a7fe80964" />
 
@@ -148,7 +167,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 #### – Find the Profit Growth (YoY): 2023 compared to 2022
 <img width="1600" height="808" alt="image" src="https://github.com/user-attachments/assets/2b45a271-59d5-4b4d-a42a-3f9b0695c869" />
 
-## 6. Visualize summary data using the Tableau platform
+## 📈 6️⃣ Visualize summary data using the Tableau platform
 
 <img width="1600" height="1073" alt="image" src="https://github.com/user-attachments/assets/5cf1a07e-cd74-4885-8388-be3bd68d8a81" />
 
