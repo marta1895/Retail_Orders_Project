@@ -1,6 +1,7 @@
 # Project Overview: Retail Orders Data Analysis
 ## Dataset Description
 The dataset comprises global mart sales data for the years 2022 and 2023, categorized into three main categories: Furniture, Office Supplies, and Technology. Each main category is further divided into detailed sub-categories.
+#### 🔗 Kaggle Dataset Link: https://www.kaggle.com/datasets/ankitbansal06/retail-orders/
 
 ## 🎯 Project Goals
 1. Import Kaggle API into Jupyter Notebook using Python
@@ -33,7 +34,7 @@ Retail_Orders_Project/
   
 # Steps and Implementation
 
-## 🔗 1. Import Kaggle API into Jupyter Notebook
+## ⚙️ 1. Import Kaggle API into Jupyter Notebook
    
 #### • First, I obtained Kaggle API Credentials by downloading a file named kaggle.json to my computer, which contains my username and an API key
 
@@ -173,7 +174,7 @@ Additionally, I decided to include several additional metrics to provide a more 
 
 <img width="1600" height="1073" alt="image" src="https://github.com/user-attachments/assets/5cf1a07e-cd74-4885-8388-be3bd68d8a81" />
 
-Link to Tableau Dashboard: https://public.tableau.com/app/profile/marta.narozhnyak/viz/shared/ZGQTXF3CW
+🔗 Link to Tableau Dashboard: https://public.tableau.com/app/profile/marta.narozhnyak/viz/shared/ZGQTXF3CW
 
 
 
