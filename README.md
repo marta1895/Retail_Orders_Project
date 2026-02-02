@@ -52,7 +52,7 @@ The dataset comprises global mart sales data for the years 2022 and 2023, catego
 ##### First, we check the data types of each column using df.info()
 <img width="1600" height="604" alt="image" src="https://github.com/user-attachments/assets/f8c26243-341b-492a-b902-47ff5e36b6ba" />
 
-##### From the output, we can see that the order_date column is stored as an object instead of a datetime data type. The numeric columns (cost_price, list_price, quantity, and discount_percent) were reviewed using df.info(). All columns were already stored as numeric (int64) data types, so no additional conversion was required.
+##### From the output, we can see that only the order_date column has an incorrect data type. It is stored as an object instead of a datetime data type. The rest of the numeric columns (cost_price, list_price, quantity, and discount_percent) were reviewed using df.info(), all columns were already stored as numeric (int64) data types, so no additional conversion was required.
 
 #### The order_date column is converted from a string (object) data type to a datetime data type using pd.to_datetime()
 <img width="1600" height="70" alt="image" src="https://github.com/user-attachments/assets/e9be3cf7-d6bf-46a2-99fb-8764acf2b31e" />
